@@ -1,0 +1,17 @@
+node_modules
+__node_modules
+.env
+.env.development
+docs/
+temp/
+token
+build/
+dist/
+README.md
+ansible/hosts
+ansible/playbook-docker.retry
+ansible/teste.retry
+ECR-README.md
+benchmark.md
+terraform/.terraform
+
