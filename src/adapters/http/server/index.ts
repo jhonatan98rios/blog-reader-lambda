@@ -5,6 +5,7 @@ import helmet from 'helmet'
 import { useAppError } from '../middlewares/useAppError'
 import Database from '@adapters/database/MongoDB/connection';
 import mongoose from 'mongoose';
+import routes from '../routes';
 
 interface IServer {
     database: Database
@@ -24,7 +25,8 @@ export class Server {
         this.app.use(helmet())
         this.app.disable('x-powered-by')
 
-        this.app.use(useAppError)         
+        this.app.use(routes)
+        this.app.use(useAppError)    
     }
     
     public async connect({ database }: IServer) {

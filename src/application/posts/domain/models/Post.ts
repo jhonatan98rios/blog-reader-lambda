@@ -1,5 +1,3 @@
-import { toSnakeCase } from "@shared/utils/toSnakeCase"
-import { CreatePostDto } from "@posts/infra/validation/CreatePost.dto"
 import { Category } from "./Category"
 import { Image } from "./Image"
 
@@ -22,10 +20,10 @@ export interface IPost {
 export class Post {
     props: IPost
 
-    constructor(props: CreatePostDto) {
+    constructor(props: any) {
         this.props = {
             ...props,
-            slug: toSnakeCase(props.title),
+            slug: props.title,
             createdAt: props.createdAt ?? new Date(),
             updatedAt: new Date(),
             seo_title: props.seo_title ?? `Jhonatan Dev Rios | ${props.title}`,
@@ -45,7 +43,7 @@ export class Post {
 
     set title(title: string) {
         this.props.title = title
-        this.props.slug = toSnakeCase(title)
+        this.props.slug = title
     }
     
     get subtitle(): string {
