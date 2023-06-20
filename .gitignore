@@ -6,6 +6,7 @@ docs/
 temp/
 token
 build/
+.build/
 dist/
 README.md
 ansible/hosts

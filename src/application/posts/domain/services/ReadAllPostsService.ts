@@ -11,7 +11,11 @@ export class ReadAllPostsService {
 
     async execute(): Promise<ReadAllPostsResponse> {
 
-        const posts = await this.postRepository.readAll()
-        return { posts }
+        try {
+            const posts = await this.postRepository.readAll()
+            return { posts }
+        } catch (err) {
+            return err as ReadAllPostsResponse
+        }
     }
 }

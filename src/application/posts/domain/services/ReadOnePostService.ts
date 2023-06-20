@@ -12,12 +12,18 @@ export class ReadOnePostService {
 
     async execute(slug: string): Promise<ReadOnePostResponse> {
 
-        const post = await this.postRepository.readOne(slug)
+        try {
+            const post = await this.postRepository.readOne(slug)
+    
+            if (!post) {
+                throw new AppError('Post não encontrado', 404)
+            }
+    
+            return { post }
 
-        if (!post) {
-            throw new AppError('Post não encontrado', 404)
+        } catch (err) {
+            return err as ReadOnePostResponse
         }
 
-        return { post }
     }
 }

@@ -1,0 +1,40 @@
+service: nodejs-serverless
+useDotenv: true
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  environment:
+    DATABASE_USER: ${env:DATABASE_USER} 
+    DATABASE_PASS: ${env:DATABASE_PASS} 
+    DATABASE_NAME: ${env:DATABASE_NAME} 
+    BUCKET_NAME: ${env:BUCKET_NAME} 
+    AWS_ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID} 
+    AWS_SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY} 
+    AWS_REGION: ${env:AWS_REGION} 
+    STORAGE_DRIVER: ${env:STORAGE_DRIVER} 
+    BUCKET_PATH: ${env:BUCKET_PATH} 
+    APP_SECRET: ${env:APP_SECRET} 
+    CLIENT_URL: ${env:CLIENT_URL} 
+    PORT: ${env:PORT} 
+
+functions:
+  readAll:
+    handler: dist/serverless.readAll
+    events:
+      - http:
+          method: get
+          path: "/posts"
+  readOne:
+    handler: dist/serverless.readOne
+    events:
+      - http:
+          method: get
+          path: "/post/{slug}"
+          request:
+            parameters:
+              paths:
+                slug: true
